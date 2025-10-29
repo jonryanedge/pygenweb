@@ -1,3 +1,4 @@
+import re
 from textnode import TextNode, TextType
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
@@ -17,13 +18,14 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
     return new_nodes
 
+def extract_markdown_images(text):
+    alt_matches = re.findall(r"!\[(.*?)\]", text)
+    src_matches = re.findall(r"\((http.*?)\)", text)
+    matches = re.findall(r"!\[(.*?)\]\((.*?)\)", text)
 
-def check_delimiter(d):
-    if d == '`':
-        return TextType.CODE
-    if d == '_':
-        return TextType.ITALIC
-    if d == '**':
-        return TextType.BOLD
-    else:
-        return TextType.TEXT
+    return matches
+
+def extract_markdown_links(text):
+    matches = re.findall(r"\[(.*?)\]\((.*?)\)", text)
+
+    return matches
