@@ -29,3 +29,16 @@ def extract_markdown_links(text):
     matches = re.findall(r"\[(.*?)\]\((.*?)\)", text)
 
     return matches
+
+def split_nodes_image(old_nodes):
+    new_nodes = []
+    for node in old_nodes:
+        if node.text_type == TextType.TEXT:
+            splits = extract_markdown_images(node.text)
+            num_parts = len(splits)
+            for i in range(num_parts):
+                part = node.text.split(f"![{splits[i][0]}]({splits[i][1])")
+            parts = node.text.split("!")
+
+
+def split_nodes_link(old_nodes):
