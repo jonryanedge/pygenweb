@@ -37,8 +37,9 @@ def split_nodes_image(old_nodes):
             splits = extract_markdown_images(node.text)
             num_parts = len(splits)
             for i in range(num_parts):
-                part = node.text.split(f"![{splits[i][0]}]({splits[i][1])")
+                part = node.text.split(f"![{splits[i][0]}]({splits[i][1]})")
             parts = node.text.split("!")
 
 
 def split_nodes_link(old_nodes):
+    pass
